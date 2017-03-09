@@ -17,8 +17,6 @@ let
      }; in
      rec {
        python27Packages = pythonPackagesWith pkgs.python27Packages;
-       python32Packages = pythonPackagesWith pkgs.python32Packages; 
-       python33Packages = pythonPackagesWith pkgs.python33Packages; 
        python34Packages = pythonPackagesWith pkgs.python34Packages; 
        python35Packages = pythonPackagesWith pkgs.python35Packages; 
          pythonPackages = pythonPackagesWith defaultPythonPackages;
