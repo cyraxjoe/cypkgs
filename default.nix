@@ -1,6 +1,6 @@
 { nixpkgs ? <nixpkgs>, basePythonPackages ? null }:
 let
-  pkgs = (import nixpkgs) {};
+  pkgs = import nixpkgs {};
   maintainer = "Joel Rivera <rivera@joel.mx>";
 in
 let
