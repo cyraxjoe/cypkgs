@@ -22,6 +22,7 @@ let
          pythonPackages = pythonPackagesWith defaultPythonPackages;
      };
   self = rec {
+   tws-api = pkgs.callPackage ./pkgs/tws-api { inherit pkgs maintainer; };
    ta-lib = pkgs.callPackage ./pkgs/ta-lib { inherit pkgs maintainer; };
   } // pythonPkgs;
 in
