@@ -1,4 +1,4 @@
-{ cyraxpkgs, pkgs, maintainer, pythonPackages}:
+{ cypkgs, pkgs, maintainer, pythonPackages}:
 with pkgs.stdenv;
 let fetchurl = pkgs.fetchurl; in
 with pythonPackages;
@@ -27,7 +27,7 @@ with pythonPackages;
       url = "mirror://pypi/T/TA-Lib/${name}.tar.gz";
       sha256 = "0a7mkxcy3qf3w1wbi6gaarpa3zvqy7s73xais9iia2fk17dxwdqi";
     };
-    buildInputs = [ cyraxpkgs.ta-lib ];
+    buildInputs = [ cypkgs.ta-lib ];
     propagatedBuildInputs = [ numpy cython ];
 
     meta = {

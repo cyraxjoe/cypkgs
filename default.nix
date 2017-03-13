@@ -12,7 +12,7 @@ let
     );
     pythonPackagesWith = pp: pkgs.callPackage ./pkgs/python-packages {
       pythonPackages = pp;
-      cyraxpkgs = self;
+      cypkgs = self;
       inherit pkgs maintainer;
      }; in
      rec {
