@@ -1,8 +1,8 @@
 { cypkgs, pkgs, maintainer, pythonPackages}:
-with pkgs.stdenv;
-let fetchurl = pkgs.fetchurl; in
 with pythonPackages;
+let fetchurl = pkgs.fetchurl;  in
 {
+  pypfop = import ./pypfop.nix { inherit pkgs maintainer pythonPackages; };
   awake = buildPythonPackage rec {
     name = "awake-${version}";
     version = "1.0";
@@ -11,10 +11,10 @@ with pythonPackages;
       url = "https://pypi.python.org/packages/source/a/awake/${name}.tar.gz";
       md5 = "57b7a2e616e37fc29b4011a2e1cc60b2";
     };
-    meta = {
-      license = lib.licenses.gpl3;    
+    meta = with pkgs.stdenv.lib; {
+      license = licenses.gpl3;    
       maintainers = [ maintainer ];
-      platforms = lib.platforms.all;
+      platforms = platforms.all;
     };
   };
   
@@ -30,10 +30,10 @@ with pythonPackages;
     buildInputs = [ cypkgs.ta-lib ];
     propagatedBuildInputs = [ numpy cython ];
 
-    meta = {
+    meta = with pkgs.stdenv.lib; {
       description = "Python wrapper for TA-Lib";
       homepage = "http://github.com/mrjbq7/ta-lib";
-      license = lib.licenses.bsdOriginal;
+      license = licenses.bsdOriginal;
       maintainers = [ maintainer ];
     };
   };
@@ -47,7 +47,7 @@ with pythonPackages;
       url = "http://interactivebrokers.github.io/downloads/twsapi_macunix.973.02.zip";
       sha256 = "10gz3az0f209g3g5ipmv55mwm4sfzdrjsqfpn52bcphzc6yyy5xp";
     };
-    meta = with lib; {
+    meta = with pkgs.stdenv.lib; {
       homepage = "http://interactivebrokers.github.io/tws-api/";
       description = "Interactive Brokers Python TWS API";
       longDescription = ''
