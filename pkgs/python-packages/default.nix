@@ -42,6 +42,24 @@ let fetchurl = pkgs.fetchurl;  in
 
   pypfop = import ./pypfop.nix { inherit pkgs maintainer pythonPackages; };
   
+
+  py-trello = buildPythonPackage rec {
+    name = "py-trello-0.9.0";
+    src = pkgs.fetchurl {
+      url = "https://pypi.python.org/packages/af/64/231f0bcc232d6bf83395f6fc92cf9f7566ee4d67c259b8c67f8cb7e15327/py-trello-0.9.0.tar.gz";
+      sha256 = "90de8a27c9f97ad769f1e3fd7d0b59b54f4ad12028b915a3deec1d7fb2594e92";
+    };
+    doCheck = false;
+    propagatedBuildInputs = [ dateutil pytz requests2 requests_oauthlib ];
+    meta = with pkgs.stdenv.lib; {
+      homepage = "https://github.com/sarumont/py-trello";
+      license = licenses.bsdOriginal;
+      description = "Python wrapper around the Trello API";
+      maintainers = [ maintainer ];
+    };
+  };
+
+
   TA-Lib = buildPythonPackage rec {
     name = "TA-Lib-${version}";
     version = "0.4.10";
@@ -61,22 +79,5 @@ let fetchurl = pkgs.fetchurl;  in
       maintainers = [ maintainer ];
     };
   };
-
-  trello = buildPythonPackage rec {
-    name = "trello-0.9.1";
-    src = pkgs.fetchurl {
-      url = "https://pypi.python.org/packages/15/5e/b39cc09f075766e2f6fd9db63a964eac0db596e68f934fd80bb56b7e1fd2/${name}.zip";
-      sha256 = "594f88ea5f2a4edd337747f00fb0acb80116b92c9bbe1c2c3acfa8c891e5b226";
-    };
-    doCheck = false;
-    propagatedBuildInputs = [ requests2 ];
-    meta = {
-      homepage = "http://trello.com";
-      license = "Copyright (c) 2012, Fog Creek Software, Inc.";
-      description = "Python library for interacting with the Trello API";
-      maintainers = [ maintainer ];
-    };
-  };
-
 
 }
