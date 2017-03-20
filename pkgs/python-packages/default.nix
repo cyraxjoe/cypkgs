@@ -42,24 +42,6 @@ let fetchurl = pkgs.fetchurl;  in
 
   pypfop = import ./pypfop.nix { inherit pkgs maintainer pythonPackages; };
   
-
-  py-trello = buildPythonPackage rec {
-    name = "py-trello-0.9.0";
-    src = pkgs.fetchurl {
-      url = "https://pypi.python.org/packages/af/64/231f0bcc232d6bf83395f6fc92cf9f7566ee4d67c259b8c67f8cb7e15327/py-trello-0.9.0.tar.gz";
-      sha256 = "90de8a27c9f97ad769f1e3fd7d0b59b54f4ad12028b915a3deec1d7fb2594e92";
-    };
-    doCheck = false;
-    propagatedBuildInputs = [ dateutil pytz requests2 requests_oauthlib ];
-    meta = with pkgs.stdenv.lib; {
-      homepage = "https://github.com/sarumont/py-trello";
-      license = licenses.bsdOriginal;
-      description = "Python wrapper around the Trello API";
-      maintainers = [ maintainer ];
-    };
-  };
-
-
   TA-Lib = buildPythonPackage rec {
     name = "TA-Lib-${version}";
     version = "0.4.10";
