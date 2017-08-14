@@ -9,7 +9,7 @@ let fetchurl = pkgs.fetchurl;  in
     doCheck = false;
     src = fetchurl {
       url = "https://pypi.python.org/packages/source/a/awake/${name}.tar.gz";
-      md5 = "57b7a2e616e37fc29b4011a2e1cc60b2";
+      sha256 = "a4be9058c08ed702b700c9e10e270a7355ba1563f22ad6b2dbd334c6bb5a1730";
     };
     meta = with pkgs.stdenv.lib; {
       license = licenses.gpl3;    
