@@ -1,4 +1,4 @@
-{ nixpkgs ? <nixpkgs> }:
+{ pkgs ? <nixpkgs> }:
 let
   pkgs = import nixpkgs {};
   cypkgs = import ./default.nix { inherit nixpkgs; };
