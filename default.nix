@@ -1,6 +1,8 @@
-{ nixpkgs ? <nixpkgs>, basePythonPackages ? null }:
+{ pkgsPath ? <nixpkgs>,
+  basePythonPackages ? null,
+  system ? builtins.currentSystem }:
 let
-  pkgs = import nixpkgs {};
+  nixpkgs = import pkgsPath {};
   maintainer = "Joel Rivera <rivera@joel.mx>";
 in
 let

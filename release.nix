@@ -1,6 +1,8 @@
-{ pkgs ? <nixpkgs> }:
+{ nixpkgs,
+  system ? builtins.currentSystem
+}:
 let
-  pkgs = import nixpkgs {};
+  pkgs = import nixpkgs { inherit system; };
   cypkgs = import ./default.nix { inherit nixpkgs; };
   pythonPackages = with pkgs.lib;
      zipLists [ "py27"  "py34" "py35" ]
