@@ -15,7 +15,10 @@ let fetchurl = pkgs.fetchurl;  in
       license = licenses.gpl3;    
       maintainers = [ maintainer ];
       platforms = platforms.all;
-      description = "Command and library to WOL a remote host.";
+      description = "WOL utility and library";
+      longDescription = ''
+          Command and library to “wake on lan” a remote host.
+      '';
     };
   };
 
