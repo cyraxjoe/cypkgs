@@ -5,7 +5,7 @@
 let
     nixpkgs = import nixpkgsPath {
        config = { allowUnfree = true;
-                  permitedInsecurePackages = [ "webkitgtk-2.4.11" ];
+                  permittedInsecurePackages = [ "webkitgtk-2.4.11" ];
                 }; inherit system; };
 in
 let  
