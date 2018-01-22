@@ -29,6 +29,15 @@ in
     ta-lib = cypkgs.ta-lib;
     python36 = nixpkgs.python36Full;
     sbcl = nixpkgs.sbcl;
-    claws-mail = nixpkgs.claws-mail;
+    claws-mail = nixpkgs.claws-mail.override {
+       enablePluginArchive = true;
+       enablePluginFancy = true;
+       enablePluginPdf  = true;
+       enablePluginRavatar = true;
+       enablePluginRssyl = true;
+       enablePluginSmime = true;
+       enablePluginVcalendar = true;
+       enableSpellcheck = true;
+    };
 }
 
