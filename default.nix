@@ -1,30 +1,30 @@
-{ pkgsPath ? <nixpkgs>,
-  basePythonPackages ? null,
-  system ? builtins.currentSystem }:
+{ nixpkgs ? (import <nixpkgs> {}) ,
+  basePythonPackages ? null}:
 let
-  nixpkgs = import pkgsPath {};
   maintainer = "Joel Rivera <rivera@joel.mx>";
 in
 let
   pythonPkgs = let
     defaultPythonPackages = (
       if basePythonPackages == null
-      then pkgs.pythonPackages 
+      then nixpkgs.pythonPackages 
       else basePythonPackages
     );
-    pythonPackagesWith = pp: pkgs.callPackage ./pkgs/python-packages {
+    pythonPackagesWith = pp: nixpkgs.callPackage ./pkgs/python-packages {
       pythonPackages = pp;
       cypkgs = self;
-      inherit pkgs maintainer;
+      pkgs = nixpkgs;
+      inherit maintainer;
      }; in {
-       python27Packages = pythonPackagesWith pkgs.python27Packages;
-       python34Packages = pythonPackagesWith pkgs.python34Packages; 
-       python35Packages = pythonPackagesWith pkgs.python35Packages; 
+       python27Packages = pythonPackagesWith nixpkgs.python27Packages;
+       python34Packages = pythonPackagesWith nixpkgs.python34Packages; 
+       python35Packages = pythonPackagesWith nixpkgs.python35Packages; 
+       python36Packages = pythonPackagesWith nixpkgs.python36Packages; 
          pythonPackages = pythonPackagesWith defaultPythonPackages;
      };
-  self = {
-   tws-api = pkgs.callPackage ./pkgs/tws-api { inherit pkgs maintainer; };
-   ta-lib = pkgs.callPackage ./pkgs/ta-lib { inherit pkgs maintainer; };
+  self = with nixpkgs; {
+   tws-api = callPackage ./pkgs/tws-api { pkgs=nixpkgs; inherit maintainer; };
+   ta-lib = callPackage ./pkgs/ta-lib { pkgs=nixpkgs; inherit maintainer; };
   } // pythonPkgs;
 in
   self

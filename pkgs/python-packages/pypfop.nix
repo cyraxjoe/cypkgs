@@ -70,7 +70,7 @@ in buildPythonPackage rec {
   propagatedBuildInputs = [ lxml ] ++ dep_list;
   meta = with pkgs.stdenv.lib; {
     homepage = "https://github.com/cyraxjoe/pypfop";
-    license = licenses.apache2;
+    license = licenses.asl20;
     maintainers = [ maintainer ];
     description = "Python Preprocessor of the Formatting Objects Processor";
   };

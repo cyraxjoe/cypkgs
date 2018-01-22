@@ -15,6 +15,7 @@ let fetchurl = pkgs.fetchurl;  in
       license = licenses.gpl3;    
       maintainers = [ maintainer ];
       platforms = platforms.all;
+      description = "Command and library to WOL a remote host.";
     };
   };
 
@@ -44,12 +45,12 @@ let fetchurl = pkgs.fetchurl;  in
   
   TA-Lib = buildPythonPackage rec {
     name = "TA-Lib-${version}";
-    version = "0.4.10";
+    version = "0.4.16";
     disabled = isPyPy;
     doCheck = false;
     src = fetchurl {
       url = "mirror://pypi/T/TA-Lib/${name}.tar.gz";
-      sha256 = "0a7mkxcy3qf3w1wbi6gaarpa3zvqy7s73xais9iia2fk17dxwdqi";
+      sha256 = "555f5d9e6720ef935669c1f404a7179091ae35869c6435957709a7059b9fd1d7";
     };
     buildInputs = [ cypkgs.ta-lib ];
     propagatedBuildInputs = [ numpy cython ];
