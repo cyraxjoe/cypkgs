@@ -3,7 +3,10 @@
   system ? builtins.currentSystem
 }:
 let
-  nixpkgs = import nixpkgsPath { config.allowUnfree = true; inherit system; };
+    nixpkgs = import nixpkgsPath {
+       config = { allowUnfree = true;
+                  permitedInsecurePackages = [ "webkitgtk-2.4.11" ];
+                }; inherit system; };
 in
 let  
   cypkgs = import cypkgsPath { inherit nixpkgs; };
