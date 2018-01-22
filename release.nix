@@ -25,5 +25,5 @@ let
 
   jobs =  with nixpkgs.lib; mapAttrs (n: v: head v) extra_packages; 
 in
- jobs // { ta-lib = cypkgs.ta-lib; }
+ jobs // { ta-lib = cypkgs.ta-lib; python36 = nixpkgs.python36Full; }
 
