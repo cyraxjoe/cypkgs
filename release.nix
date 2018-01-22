@@ -29,5 +29,6 @@ in
     ta-lib = cypkgs.ta-lib;
     python36 = nixpkgs.python36Full;
     sbcl = nixpkgs.sbcl;
+    claws-mail = nixpkgs.claws-mail;
 }
 
