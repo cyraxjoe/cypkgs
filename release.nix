@@ -33,7 +33,7 @@ in
     python36 = python36Full;
     sbcl = sbcl;
     claws-mail = claws-mail.override {
-       enablePluginnnArchive = true;
+       enablePluginnArchive = true;
        enablePluginFancy = true;
        enablePluginPdf  = true;
        enablePluginRavatar = true;
@@ -80,10 +80,9 @@ in
         '';
 
         distPhase = ''
-          set +o pipefail # otherwise it will fail because of pipefail and the git+head
-          version=$(git reflog | head -n 1 | cut -d ' ' -f 1)
-          set -o pipefail
-          releaseName="cypkgs-$version"
+          echo "VARS"
+          env
+          releaseName="cypkgs-latests"
           mkdir -p $out/tarballs
           mkdir ../$releaseName
           cp -prd . ../$releaseName
