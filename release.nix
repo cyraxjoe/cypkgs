@@ -33,7 +33,7 @@ in
     python36 = python36Full;
     sbcl = sbcl;
     claws-mail = claws-mail.override {
-       enablePluginnArchive = true;
+       enablePluginArchive = true;
        enablePluginFancy = true;
        enablePluginPdf  = true;
        enablePluginRavatar = true;
@@ -42,6 +42,7 @@ in
        enablePluginVcalendar = true;
        enableSpellcheck = true;
     };    
+
     cypkgs =  stdenv.mkDerivation {
         name = "cypkgs-latest";
         src = cypkgsPath; 
