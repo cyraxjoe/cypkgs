@@ -32,6 +32,6 @@ in
     python36 = python36Full;
     cherrypy = python36Packages.cherrypy;
     pyramid = python36Packages.pyramid;
-    pandas = python36Packages.pandas;
+    jupyter = python36Packages.jupyter;
     })
 
