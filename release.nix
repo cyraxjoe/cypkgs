@@ -1,12 +1,11 @@
-{ cypkgsPath ? ./.,
-  nixpkgsPath ? <nixpkgs>,
-  system ? builtins.currentSystem
+{ cypkgsPath ? ./.
+ ,nixpkgsPath ? <nixpkgs>
+ ,system ? builtins.currentSystem
 }:
 let
     nixpkgs = import nixpkgsPath {
-       config = { allowUnfree = true;
-                  permittedInsecurePackages = [ "webkitgtk-2.4.11" ];
-                }; inherit system; };
+       config = { allowUnfree = true;}; inherit system; 
+    };
 in
 let  
   cypkgs = import cypkgsPath { inherit nixpkgs; };
@@ -31,5 +30,7 @@ in
     jobs // (with nixpkgs; {
     ta-lib = cypkgs.ta-lib;
     python36 = python36Full;
+    cherrypy = python36Packages.cherrypy;
+    pyramid = python36Packages.pyramid;
     })
 
