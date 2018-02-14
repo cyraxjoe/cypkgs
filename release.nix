@@ -32,6 +32,54 @@ in
     python36 = python36Full;
     cherrypy = python36Packages.cherrypy;
     pyramid = python36Packages.pyramid;
-    jupyter = python36Packages.jupyter;
+    tarball =  stdenv.mkDerivation {
+        name = "cypkgs-latest";
+        src = cypkgsPath; 
+        buildInputs = [ git ];
+        dontBuild = true;
+        dontInstall = true;
+        doDist = true;
+        postPhases = "finalPhase";
+        preUnpack = ''
+            mkdir -p $out/nix-support
+        '';
+        postUnpack = ''
+            # Set all source files to the current date.  This is because Nix
+            # resets the timestamp on all files to 0 (1/1/1970), which some
+            # people don't like (in particular GNU tar prints harmless but
+            # frightening warnings about it).
+            touch now
+            touch -d "1970-01-01 00:00:00 UTC" then
+            find $sourceRoot ! -newer then -print0 | xargs -0r touch --reference now
+            rm now then
+            eval "$nextPostUnpack"
+        '';
+        # Cause distPhase to copy tar.bz2 in addition to tar.gz.
+        tarballs = "*.tar.bz2";
+        finalPhase = ''
+            for i in "$out/tarballs/"*; do
+               echo "file source-dist $i" >> $out/nix-support/hydra-build-products
+            done
+            # Try to figure out the release name.
+            releaseName=$( (cd $out/tarballs && ls) | head -n 1 | sed -e 's^\.[a-z].*^^')
+            test -n "$releaseName" && (echo "$releaseName" >> $out/nix-support/hydra-release-name)
+        '';
+        distPhase = ''
+          releaseName="cypkgs-latests"
+          mkdir -p $out/tarballs
+          mkdir ../$releaseName
+          cp -prd . ../$releaseName
+          cd ..
+          chmod -R u+w $releaseName
+          tar  --create --file  $out/tarballs/$releaseName.tar.bz2  --bzip2 --verbose --exclude-vcs $releaseName
+        ''; # */
+
+        meta = {
+            description = "cypkgs source distribution";
+            # Tarball builds are generally important, so give them a high
+            # default priority.
+            schedulingPriority = 200;
+        };
+    };
     })
 
