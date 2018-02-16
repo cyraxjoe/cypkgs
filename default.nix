@@ -25,6 +25,7 @@ let
   self = with nixpkgs; {
    tws-api = callPackage ./pkgs/tws-api { pkgs=nixpkgs; inherit maintainer; };
    ta-lib = callPackage ./pkgs/ta-lib { pkgs=nixpkgs; inherit maintainer; };
+   netcat  = netcat; # test
   } // pythonPkgs;
 in
   self
