@@ -29,8 +29,9 @@ let
 in
     jobs // (with nixpkgs; {
     ta-lib = cypkgs.ta-lib;
+    cherrypy = cypkgs.cherrypy;
+    pyramid = cypkgs.pyramid;
     python36 = python36Full;
-    cherrypy = python36Packages.cherrypy;
-    pyramid = python36Packages.pyramid;
+
     })
 
