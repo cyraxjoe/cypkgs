@@ -32,6 +32,5 @@ in
     python36 = python36Full;
     cherrypy = python36Packages.cherrypy;
     pyramid = python36Packages.pyramid;
-    netcat  = cypkgs.netcat;
     })
 
