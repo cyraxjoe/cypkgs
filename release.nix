@@ -27,7 +27,6 @@ let
 
   jobs =  with nixpkgs.lib; mapAttrs (n: v: head v) extra_packages; 
 in
-    jobs // (with nixpkgs; {
-    ta-lib = cypkgs.ta-lib;
-    })
+    jobs // (with nixpkgs.lib; (filterAttrs (n: v: isDerivation v) cypkgs))
+
 
