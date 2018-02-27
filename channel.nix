@@ -7,11 +7,12 @@ in
 let 
   localpkgs =  import cypkgs { nixpkgs = pkgs; };
 in
-  with pkgs; {
+  with pkgs; rec {
     channel = releaseTools.channel {
        name = "cypkgs";
        src = cypkgs;
-       constituents = with localpkgs; [ tws-api ta-lib];
+       constituents = [ tws-api ta-lib ];
        isNixOS = false;
     };
+    inherit (localpkgs) tws-api ta-lib;
   }
