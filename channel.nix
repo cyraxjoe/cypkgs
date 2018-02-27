@@ -2,14 +2,12 @@
 , nixpkgs ? <nixpkgs>
 , system ? builtins.currentSystem 
 }:
-let pkgs = import nixpkgs  {
-                config = { allowUnfree = true;}; inherit system;
-           };
+let pkgs = import nixpkgs  {config = { allowUnfree = true;}; inherit system; };
 in
 let 
-  localpkgs =  import cypkgs { inherit nixpkgs };
+  localpkgs =  import cypkgs { nixpkgs = pkgs; };
 in
-  with nixpkgs; releaseTools.channel {
+  with pkgs; releaseTools.channel {
     name = "cypkgs";
     src = cypkgs;
     constituents = with localpkgs; [ tws-api ta-lib];
